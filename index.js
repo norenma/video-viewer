@@ -21,8 +21,15 @@ async function onToggleDownload(videoBlob, element, url) {
 
 window.addEventListener("load", async () => {
   await initDB();
-  const videoBlob = await fetchVideoIfNeeded(video);
+  let videoBlob;
   const rootElement = document.querySelector("section");
+  try {
+      videoBlob = await fetchVideoIfNeeded(video);
+  }
+  catch (e) {
+      rootElement.innerHTML = "Could not fetch video.";
+      return;
+  }
   renderVideo(videoBlob, rootElement);
   const isDownloaded = await isMovieSaved(video);
   const button = renderDownloadButton(isDownloaded, rootElement);
@@ -30,8 +37,8 @@ window.addEventListener("load", async () => {
     onToggleDownload(videoBlob, rootElement, video)
   );
 
-  //   if ("serviceWorker" in navigator) {
-  //     await navigator.serviceWorker.register("sw.js");
-  //     console.log("Service Worker Registered");
-  //   }
+//   if ("serviceWorker" in navigator) {
+//     await navigator.serviceWorker.register("sw.js");
+//     console.log("Service Worker Registered");
+//   }
 });
