@@ -1,8 +1,8 @@
 import {
   fetchVideoIfNeeded,
-  isMovieSaved,
-  storeMovie,
-  removeMovie,
+  isVideoSaved,
+  storeVideo,
+  removeVideo,
   initDB,
 } from "./database";
 import { renderDownloadButton, renderVideo } from "./renderers";
@@ -10,12 +10,12 @@ import video from "./video.mp4";
 import "./styles.css";
 
 async function onToggleDownload(videoBlob, element, url) {
-  const isDownloaded = await isMovieSaved(url);
+  const isDownloaded = await isVideoSaved(url);
   let operationSuccessful;
   if (!isDownloaded) {
-    operationSuccessful = await storeMovie(videoBlob, url);
+    operationSuccessful = await storeVideo(videoBlob, url);
   } else {
-    operationSuccessful = await removeMovie(url);
+    operationSuccessful = await removeVideo(url);
   }
   if (!operationSuccessful) {
       return;
@@ -35,7 +35,7 @@ window.addEventListener("load", async () => {
       return;
   }
   renderVideo(videoBlob, rootElement);
-  const isDownloaded = await isMovieSaved(video);
+  const isDownloaded = await isVideoSaved(video);
   const button = renderDownloadButton(isDownloaded, rootElement);
   button.addEventListener("click", () =>
     onToggleDownload(videoBlob, rootElement, video)

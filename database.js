@@ -8,8 +8,6 @@ export async function initDB() {
     };
 
     request.onsuccess = () => {
-      console.log("Database opened succesfully");
-
       db = request.result;
       resolve();
     };
@@ -17,7 +15,7 @@ export async function initDB() {
     request.onupgradeneeded = function (e) {
       let db = e.target.result;
       let objectStore = db.createObjectStore("videos", { keyPath: "name" });
-      objectStore.createIndex("mp4", "mp4", { unique: false });
+      objectStore.createIndex("mp4", "mp4");
     };
   });
 }
@@ -28,16 +26,16 @@ async function fetchVideoBlob(url) {
 }
 
 // Should return true if video is successfully removed.
-export async function removeMovie(url) {
+export async function removeVideo(url) {
   return false;
 }
 
 // Should return true if video is successfully stored.
-export const storeMovie = (mp4Blob, url) => {
+export const storeVideo = (mp4Blob, url) => {
   return false;
 };
 
-export async function isMovieSaved(url) {
+export async function isVideoSaved(url) {
   return false;
 }
 
