@@ -27,16 +27,18 @@ async function fetchVideoBlob(url) {
   return video.blob();
 }
 
+// Should return true if video is successfully removed.
 export async function removeMovie(url) {
-
+  return false;
 }
 
+// Should return true if video is successfully stored.
 export const storeMovie = (mp4Blob, url) => {
-
+  return false;
 };
 
 export async function isMovieSaved(url) {
-
+  return false;
 }
 
 async function fetchFromDb(url) {
@@ -44,5 +46,5 @@ async function fetchFromDb(url) {
 }
 
 export async function fetchVideoIfNeeded(url) {
-
+  return fetchVideoBlob(url);
 }

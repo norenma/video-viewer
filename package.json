@@ -14,5 +14,6 @@
   },
   "browserslist": [
     "since 2017-06"
-  ]
+  ],
+  "repository": "https://github.com/norenma/video-viewer.git"
 }

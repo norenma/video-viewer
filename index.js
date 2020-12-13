@@ -11,10 +11,14 @@ import "./styles.css";
 
 async function onToggleDownload(videoBlob, element, url) {
   const isDownloaded = await isMovieSaved(url);
+  let operationSuccessful;
   if (!isDownloaded) {
-    await storeMovie(videoBlob, url);
+    operationSuccessful = await storeMovie(videoBlob, url);
   } else {
-    await removeMovie(url);
+    operationSuccessful = await removeMovie(url);
+  }
+  if (!operationSuccessful) {
+      return;
   }
   renderDownloadButton(!isDownloaded, element);
 }
